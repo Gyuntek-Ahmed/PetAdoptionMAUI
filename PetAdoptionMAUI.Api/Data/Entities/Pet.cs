@@ -15,11 +15,14 @@ namespace PetAdoptionMAUI.Api.Data.Entities
         [Required, MaxLength(180)]
         public string Image { get; set; } = null!;
 
-        [MaxLength(50)]
-        public string? Breed { get; set; }
+        [Required, MaxLength(50)]
+        public string Breed { get; set; } = null!;
 
         [Required]
         public Gender Gender { get; set; }
+
+        [Required]
+        public Category Category { get; set; }
 
         [Required, Range(0, double.MaxValue)]
         public double Price { get; set; }

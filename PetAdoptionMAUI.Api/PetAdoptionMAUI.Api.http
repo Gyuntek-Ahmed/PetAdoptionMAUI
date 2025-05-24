@@ -1,4 +1,4 @@
-@PetAdoptionMAUI.Api_HostAddress = http://localhost:5289
+@PetAdoptionMAUI.Api_HostAddress = https://localhost:5289
 
 GET {{PetAdoptionMAUI.Api_HostAddress}}/weatherforecast/
 Accept: application/json

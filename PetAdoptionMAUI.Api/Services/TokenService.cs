@@ -24,7 +24,7 @@ namespace PetAdoptionMAUI.Api.Services
                 ValidateIssuerSigningKey = true,
                 ValidateAudience = false,
                 ValidateLifetime = true,
-                IssuerSigningKey = GetSecurityKey(configuration)
+                IssuerSigningKey = GetSecurityKey(configuration) // Updated to use static method
             };
         }
 
@@ -35,13 +35,12 @@ namespace PetAdoptionMAUI.Api.Services
             var expiteInMinutes = Convert.ToInt32(_configuration["Jwt:ExpireInMinutes"] ?? "60");
 
             var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+                {
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                };
 
-            if(additionalClaims.Any())
+            if (additionalClaims.Any())
                 claims.AddRange(additionalClaims);
-            
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
@@ -52,21 +51,21 @@ namespace PetAdoptionMAUI.Api.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public string GenerateJWT(User user, IEnumerable<Claim> additionalClaims)
+        public string GenerateJWT(User user, IEnumerable<Claim>? additionalClaims = null)
         {
             var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Name)
-            };
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.Name)
+                };
 
-            if(additionalClaims.Any())
+            if (additionalClaims?.Any() == true)
                 claims.AddRange(additionalClaims);
 
             return GenerateJWT(claims);
         }
 
-        private SymmetricSecurityKey GetSecurityKey(IConfiguration configuration)
+        private static SymmetricSecurityKey GetSecurityKey(IConfiguration _configuration)
             => new(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
     }
 }
