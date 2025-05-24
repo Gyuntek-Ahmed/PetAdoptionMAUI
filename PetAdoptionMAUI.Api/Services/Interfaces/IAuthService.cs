@@ -1,7 +1,7 @@
 ﻿using PetAdoptionMAUI.Shared.Dtos.Request;
 using PetAdoptionMAUI.Shared.Dtos.Response;
 
-namespace PetAdoptionMAUI.Api.Services
+namespace PetAdoptionMAUI.Api.Services.Interfaces
 {
     public interface IAuthService
     {

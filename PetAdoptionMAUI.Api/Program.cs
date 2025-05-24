@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using PetAdoptionMAUI.Api.Data;
+using PetAdoptionMAUI.Api.Services;
+using PetAdoptionMAUI.Api.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +13,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(jwtOptions
+               => jwtOptions
+                 .TokenValidationParameters = TokenService.GetTokenValidationParameters(builder.Configuration));
+
 var connectionString = builder.Configuration.GetConnectionString("Pet");
 builder.Services.AddDbContext<PetContext>( opt => opt.UseSqlServer(connectionString), ServiceLifetime.Transient);
+
+// Register services
+builder.Services
+    .AddTransient<IAuthService, AuthService>()
+    .AddTransient<TokenService>()
+    .AddTransient<IUserPetService, UserPetService>()
+    .AddTransient<IPetService, PetService>();
 
 var app = builder.Build();
 
@@ -28,11 +47,12 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run("https://localhost:5289");
+app.Run();
 
 static void ApplyDbMigrations(IServiceProvider serviceProvider)
 {

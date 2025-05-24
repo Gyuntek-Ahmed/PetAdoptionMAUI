@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetAdoptionMAUI.Api.Data;
 using PetAdoptionMAUI.Api.Data.Entities;
+using PetAdoptionMAUI.Api.Services.Interfaces;
 using PetAdoptionMAUI.Shared.Dtos.Request;
 using PetAdoptionMAUI.Shared.Dtos.Response;
 
