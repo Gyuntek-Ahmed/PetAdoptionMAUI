@@ -1,25 +1,24 @@
-﻿namespace PetAdoptionMAUI.Mobile
+﻿using PetAdoptionMAUI.Mobile.Pages;
+using System.Threading.Tasks;
+
+namespace PetAdoptionMAUI.Mobile
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            count++;
+            base.OnAppearing();
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+            // Check if onboarding screen shown
+            if(Preferences.Default.ContainsKey(UIConstants.OnboardingShown))
+                await Shell.Current.GoToAsync($"//{nameof(LoginRegisterPage)}");
             else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+                await Shell.Current.GoToAsync($"//{nameof(OnBoardingPage)}");
         }
     }
-
 }

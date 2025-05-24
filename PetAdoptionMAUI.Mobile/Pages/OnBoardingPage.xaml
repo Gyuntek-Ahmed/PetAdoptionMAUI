@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PetAdoptionMAUI.Mobile.Pages.OnBoardingPage" >
+
+    <Grid RowDefinitions="*, *">
+        <Border
+            Grid.Row="0"
+            HeightRequest="300"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Stroke="AliceBlue"
+            StrokeShape="RoundRectangle 150"
+            StrokeThickness="10"
+            WidthRequest="300">
+            
+            <Image
+                Source="dogs.jpg"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Aspect="Fill"
+                HeightRequest="300"
+                WidthRequest="300"/>
+
+            <Border.Shadow>
+                    <Shadow
+                        Brush="AliceBlue"
+                        Radius="250" />
+            </Border.Shadow>
+        </Border>
+        <Grid
+            Grid.Row="1"
+            RowDefinitions="*, Auto"
+            Padding="15">
+
+            <VerticalStackLayout
+                Grid.Row="0"
+                Spacing="30">
+                <Label
+                    Text="Намери любимия си приятел тук"
+                    FontSize="40"
+                    FontAttributes="Bold"
+                    LineHeight="1.2"/>
+                <Label
+                    Text="Намери новият си приятел в нашето приложение! При нас имаш огромен избор между всякакви другари."
+                    FontSize="18"
+                    HorizontalTextAlignment="Center"
+                    LineHeight="1.3"/>
+            </VerticalStackLayout>
+
+            <Button
+                Grid.Row="1"
+                Text="Разгледай"
+                Style="{StaticResource btnPrimary}"
+                Clicked="Button_Clicked"/>
+        </Grid>
+    </Grid>
+</ContentPage>

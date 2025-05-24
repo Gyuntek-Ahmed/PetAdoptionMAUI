@@ -4,12 +4,57 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PetAdoptionMAUI.Mobile"
-    Shell.FlyoutBehavior="Flyout"
+    xmlns:pages="clr-namespace:PetAdoptionMAUI.Mobile.Pages"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Shell.FlyoutBehavior="Disabled"
     Title="PetAdoptionMAUI.Mobile">
 
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior
+            StatusBarColor="AliceBlue"
+            StatusBarStyle="DarkContent"/>
+    </Shell.Behaviors>
+
     <ShellContent
-        Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
+    <ShellContent
+        ContentTemplate="{DataTemplate pages:OnBoardingPage}"
+        Route="OnBoardingPage"
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False" />
+
+    <ShellContent
+        Title=""
+        ContentTemplate="{DataTemplate pages:LoginRegisterPage}"
+        Route="LoginRegisterPage"
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False" />
+
+    <TabBar>
+        <ShellContent
+            Title="Начало"
+            Icon="home.png"
+            ContentTemplate="{DataTemplate pages:HomePage}"
+            Route="HomePage"/>
+
+        <ShellContent
+            Title="Всички Животни"
+            Icon="list.png"
+            ContentTemplate="{DataTemplate pages:AllPetsPage}"
+            Route="AllPetsPage"/>
+
+        <ShellContent
+            Title="Любими"
+            Icon="heart"
+            ContentTemplate="{DataTemplate pages:FavoritesPage}"
+            Route="FavoritesPage"/>
+
+        <ShellContent
+            Title="Профил"
+            Icon="user.png"
+            ContentTemplate="{DataTemplate pages:ProfilePage}"
+            Route="ProfilePage"/>
+    </TabBar>
 </Shell>
