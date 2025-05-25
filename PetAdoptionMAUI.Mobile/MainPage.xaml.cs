@@ -1,7 +1,4 @@
-﻿using PetAdoptionMAUI.Mobile.Pages;
-using System.Threading.Tasks;
-
-namespace PetAdoptionMAUI.Mobile
+﻿namespace PetAdoptionMAUI.Mobile
 {
     public partial class MainPage : ContentPage
     {
@@ -16,7 +13,7 @@ namespace PetAdoptionMAUI.Mobile
 
             // Check if onboarding screen shown
             if(Preferences.Default.ContainsKey(UIConstants.OnboardingShown))
-                await Shell.Current.GoToAsync($"//{nameof(LoginRegisterPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             else
                 await Shell.Current.GoToAsync($"//{nameof(OnBoardingPage)}");
         }

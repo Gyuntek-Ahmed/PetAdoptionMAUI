@@ -5,8 +5,15 @@
 namespace PetAdoptionMAUI.Mobile.ViewModels
 {
     [QueryProperty(nameof(IsFirstTime), nameof(IsFirstTime))]
-    public partial class LoginRegisterViewModel : ObservableObject
+    public partial class LoginRegisterViewModel : BaseViewModel
     {
+        private readonly AuthService _authService;
+
+        public LoginRegisterViewModel(AuthService authService)
+        {
+            _authService = authService;
+        }
+
         [ObservableProperty]
         private bool _isRegistrationMode;
 
@@ -16,12 +23,9 @@ namespace PetAdoptionMAUI.Mobile.ViewModels
         [ObservableProperty]
         private bool _isFirstTime;
 
-        [ObservableProperty]
-        private bool _isBusy;
-
-        public void Initialize()
+        partial void OnIsFirstTimeChanged(bool value)
         {
-            if (IsFirstTime)
+            if (value)
                 IsRegistrationMode = true;
         }
 
@@ -29,22 +33,24 @@ namespace PetAdoptionMAUI.Mobile.ViewModels
         private void ToggleMode() => IsRegistrationMode = !IsRegistrationMode;
 
         [RelayCommand]
-        private async Task SkipForNow()
-                    => await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+        private async Task SkipForNow() => await GoToAsync($"//{nameof(HomePage)}");
 
         [RelayCommand]
         private async Task Submit()
         {
             if(!Model.Validate(IsRegistrationMode))
             {
-                await Toast.Make("Всички полета са задължителни!").Show();
+                await ShowToastAsync("Всички полета са задължителни");
                 return;
             }
 
             IsBusy = true;
+
             // Make Api call to register or login user
-            await Task.Delay(1000); // Simulate API call delay
-            await SkipForNow();
+            var status = await _authService.LoginRegisterAsync(Model);
+            if(status)
+                await SkipForNow();
+
             IsBusy = false;
         }
     }

@@ -73,17 +73,14 @@
                     <Entry
                         Placeholder="Въведете име"
                         Text="{Binding Model.Name}"
-                        PlaceholderColor="AliceBlue"
                         IsVisible="{Binding IsRegistrationMode}"/>
                     <Entry
                         Placeholder="Въведете имейл"
                         Text="{Binding Model.Email}"
-                        PlaceholderColor="AliceBlue"
                         Keyboard="Email"/>
                     <Entry
                         Placeholder="Въведете парола"
                         Text="{Binding Model.Password}"
-                        PlaceholderColor="AliceBlue"
                         IsPassword="True"/>
 
                     <Button
