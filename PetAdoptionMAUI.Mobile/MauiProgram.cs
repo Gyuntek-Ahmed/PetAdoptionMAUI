@@ -21,7 +21,17 @@ namespace PetAdoptionMAUI.Mobile
     		builder.Logging.AddDebug();
 #endif
 
+            // Register app dependencies
+            RegisterAppDependencies(builder.Services);
             return builder.Build();
+        }
+
+        static void RegisterAppDependencies(IServiceCollection services)
+        {
+            // Register your services and view models here
+            services
+                .AddTransient<LoginRegisterViewModel>()
+                .AddTransient<LoginRegisterPage>();
         }
     }
 }

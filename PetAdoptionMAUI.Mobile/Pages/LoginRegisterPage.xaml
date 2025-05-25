@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PetAdoptionMAUI.Mobile.Pages.LoginRegisterPage"
+             xmlns:vm="clr-namespace:PetAdoptionMAUI.Mobile.ViewModels"
+             xmlns:models="clr-namespace:PetAdoptionMAUI.Mobile.Models"
+             x:DataType="vm:LoginRegisterViewModel"
              Title="">
 
     <Grid RowDefinitions="2*, 3*">
@@ -34,7 +37,16 @@
                         Text="Вход"
                         FontSize="40"
                         FontAttributes="Bold"
-                        LineHeight="1.2"/>
+                        LineHeight="1.2">
+                        <Label.Triggers>
+                            <DataTrigger
+                                TargetType="Label"
+                                Binding="{Binding IsRegistrationMode}"
+                                Value="True">
+                                <Setter Property="Text" Value="Регистрация" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                     <Label
                         Grid.Column="1"
                         Text="Регистрация"
@@ -42,25 +54,51 @@
                         HorizontalOptions="End"
                         Padding="5"
                         FontAttributes="Bold"
-                        TextDecorations="Underline"/>
+                        TextDecorations="Underline">
+                        <Label.Triggers>
+                            <DataTrigger
+                                TargetType="Label"
+                                Binding="{Binding IsRegistrationMode}"
+                                Value="True">
+                                <Setter Property="Text" Value="Вход" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggleModeCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
                 </Grid>
 
                 <VerticalStackLayout Spacing="10">
                     <Entry
                         Placeholder="Въведете име"
-                        PlaceholderColor="AliceBlue"/>
+                        Text="{Binding Model.Name}"
+                        PlaceholderColor="AliceBlue"
+                        IsVisible="{Binding IsRegistrationMode}"/>
                     <Entry
                         Placeholder="Въведете имейл"
+                        Text="{Binding Model.Email}"
                         PlaceholderColor="AliceBlue"
                         Keyboard="Email"/>
                     <Entry
                         Placeholder="Въведете парола"
+                        Text="{Binding Model.Password}"
                         PlaceholderColor="AliceBlue"
                         IsPassword="True"/>
 
                     <Button
                         Text="Вход"
-                        Style="{StaticResource btnPrimary}"/>
+                        Command="{Binding SubmitCommand}"
+                        Style="{StaticResource btnPrimary}">
+                        <Button.Triggers>
+                            <DataTrigger
+                                TargetType="Button"
+                                Binding="{Binding IsRegistrationMode}"
+                                Value="True">
+                                <Setter Property="Text" Value="Регистрация" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
                 </VerticalStackLayout>
 
                 <Grid ColumnDefinitions="*, Auto, *" ColumnSpacing="5">
@@ -71,10 +109,11 @@
 
                     <Button
                         Grid.Column="1"
-                        Text="Skip for now"
+                        Text="Пропускане"
                         HorizontalOptions="Center"
                         Padding="25, 5"
-                        HeightRequest="30" />
+                        HeightRequest="30"
+                        Command="{Binding SkipForNowCommand}"/>
                     
                     <BoxView
                         Grid.Column="2"
@@ -83,5 +122,13 @@
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>
+
+        <ActivityIndicator
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsBusy}"
+            Color="AliceBlue"
+            HeightRequest="30"
+            WidthRequest="30" />
     </Grid>
 </ContentPage>

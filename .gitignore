@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+PetAdoptionMAUI.Api/appsettings.json
+PetAdoptionMAUI.Api/appsettings.Development.json
