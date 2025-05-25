@@ -40,6 +40,10 @@ namespace PetAdoptionMAUI.Mobile
             services
                 .AddTransient<LoginRegisterViewModel>()
                 .AddTransient<LoginRegisterPage>();
+
+            services
+                .AddSingleton<HomeViewModel>()
+                .AddSingleton<HomePage>();
         }
 
         static void ConfigureRefit(IServiceCollection services)

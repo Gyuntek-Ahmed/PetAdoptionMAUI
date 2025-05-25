@@ -1,4 +1,5 @@
 ﻿using PetAdoptionMAUI.Api.Data.Entities;
+using PetAdoptionMAUI.Shared;
 using PetAdoptionMAUI.Shared.Dtos;
 
 namespace PetAdoptionMAUI.Api.Extensions
@@ -17,7 +18,7 @@ namespace PetAdoptionMAUI.Api.Extensions
                 Id = pet.Id,
                 Name = pet.Name,
                 Price = pet.Price,
-                Image = pet.Image,
+                Image = $"{AppConstants.BaseApiUrl}/images/pets/{pet.Image}",
             };
     }
 }

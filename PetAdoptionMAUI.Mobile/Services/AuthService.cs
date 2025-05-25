@@ -34,7 +34,7 @@ namespace PetAdoptionMAUI.Mobile.Services
                         Password = model.Password
                     });
             }
-            catch (Refit.ApiException ex)
+            catch (Refit.ApiException)
             {
                 await App.Current!.Windows!.First()!.Page!.DisplayAlert("Грешка", "Невалиден имейл адрес", "OK");
                 return false;

@@ -7,6 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\images\pets\bird\**" />
+    <Compile Remove="wwwroot\images\pets\cats\**" />
+    <Compile Remove="wwwroot\images\pets\dogs\**" />
+    <Compile Remove="wwwroot\images\pets\fish\**" />
+    <Content Remove="wwwroot\images\pets\bird\**" />
+    <Content Remove="wwwroot\images\pets\cats\**" />
+    <Content Remove="wwwroot\images\pets\dogs\**" />
+    <Content Remove="wwwroot\images\pets\fish\**" />
+    <EmbeddedResource Remove="wwwroot\images\pets\bird\**" />
+    <EmbeddedResource Remove="wwwroot\images\pets\cats\**" />
+    <EmbeddedResource Remove="wwwroot\images\pets\dogs\**" />
+    <EmbeddedResource Remove="wwwroot\images\pets\fish\**" />
+    <None Remove="wwwroot\images\pets\bird\**" />
+    <None Remove="wwwroot\images\pets\cats\**" />
+    <None Remove="wwwroot\images\pets\dogs\**" />
+    <None Remove="wwwroot\images\pets\fish\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.16" />
@@ -21,13 +40,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PetAdoptionMAUI.Shared\PetAdoptionMAUI.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\pets\cats\" />
-    <Folder Include="wwwroot\images\pets\dogs\" />
-    <Folder Include="wwwroot\images\pets\fish\" />
-    <Folder Include="wwwroot\images\pets\bird\" />
   </ItemGroup>
 
 </Project>

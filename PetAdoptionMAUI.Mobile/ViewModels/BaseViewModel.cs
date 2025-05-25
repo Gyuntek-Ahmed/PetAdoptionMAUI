@@ -23,7 +23,7 @@ namespace PetAdoptionMAUI.Mobile.ViewModels
         protected async Task ShowToastAsync(string message)
             => await Toast.Make(message).Show();
 
-        protected async Task ShowAlertAsync(string title, string message, string buttonText)
+        protected async Task ShowAlertAsync(string title, string message, string buttonText = "Ok")
             => await App.Current.Windows.FirstOrDefault().Page.DisplayAlert(title, message, buttonText);
 
         protected async Task<bool> ShowConfirmAsync(string title, string message, string okBtnText, string cancelBtnText)

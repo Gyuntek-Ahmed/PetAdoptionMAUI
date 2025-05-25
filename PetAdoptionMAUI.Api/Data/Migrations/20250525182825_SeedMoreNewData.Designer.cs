@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetAdoptionMAUI.Api.Data;
 
@@ -11,9 +12,11 @@ using PetAdoptionMAUI.Api.Data;
 namespace PetAdoptionMAUI.Api.Data.Migrations
 {
     [DbContext(typeof(PetContext))]
-    partial class PetContextModelSnapshot : ModelSnapshot
+    [Migration("20250525182825_SeedMoreNewData")]
+    partial class SeedMoreNewData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
