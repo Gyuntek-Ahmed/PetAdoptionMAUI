@@ -8,6 +8,10 @@ namespace PetAdoptionMAUI.Mobile.ViewModels
         [ObservableProperty]
         private bool _isBusy;
 
+        [RelayCommand]
+        private async Task GoToDetailsPage(int petId)
+            => await GoToAsync($"{nameof(DetailsPage)}?{nameof(DetailsViewModel.PetId)}={petId}");
+
         protected async Task GoToAsync(ShellNavigationState state)
             => await Shell.Current.GoToAsync(state);
 
@@ -20,7 +24,7 @@ namespace PetAdoptionMAUI.Mobile.ViewModels
         protected async Task GoToAsync(ShellNavigationState state, bool animate, IDictionary<string, object> parameters)
             => await Shell.Current.GoToAsync(state, animate, parameters);
 
-        protected async Task ShowToastAsync(string message)
+        public async Task ShowToastAsync(string message)
             => await Toast.Make(message).Show();
 
         protected async Task ShowAlertAsync(string title, string message, string buttonText = "Ok")

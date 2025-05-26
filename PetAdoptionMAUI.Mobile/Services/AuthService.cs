@@ -56,7 +56,7 @@ namespace PetAdoptionMAUI.Mobile.Services
 
         private void SetUser(LoggedInUser user) => Preferences.Default.Set(UIConstants.UserInfo, user.ToJson());
 
-        public async Task LogOut()
+        public void LogOut()
         {
             _commonService.SetToken(string.Empty);
             Preferences.Default.Remove(UIConstants.UserInfo);

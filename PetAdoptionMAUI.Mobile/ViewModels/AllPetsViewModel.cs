@@ -9,6 +9,7 @@
             _petsApi = petsApi;
         }
 
+        [ObservableProperty]
         private IEnumerable<PetListDto> _pets = Enumerable.Empty<PetListDto>();
 
         [ObservableProperty]
@@ -18,15 +19,19 @@
 
         public async Task InizializeAsync()
         {
-            if(_isInitialized)
+            if (_isInitialized)
                 return;
 
-            await LoadAllPets();
+            _isInitialized = true;
+            await LoadAllPets(true);
         }
 
-        private async Task LoadAllPets()
+        private async Task LoadAllPets(bool initialLoad)
         {
-            IsBusy = true;
+            if (initialLoad)
+                IsBusy = true;
+            else
+                IsRefreshing = true;
 
             try
             {
@@ -34,20 +39,21 @@
 
                 if (apiResponse.IsSuccess)
                     Pets = apiResponse.Data;
-                
                 else
-                {
-                    await ShowAlertAsync("грешка при зареждане на всички животни", apiResponse.Message!);
-                }
+                    await ShowAlertAsync("Грешка при зареждане на всички животни!", apiResponse.Message!);
+
             }
             catch (Exception ex)
             {
-                await ShowAlertAsync("грешка при зареждане на всички животни", ex.Message);
+                await ShowAlertAsync("Грешка при зареждане на всички животни!", ex.Message);
             }
             finally
             {
-                IsBusy = false;
+                IsBusy = IsRefreshing = false;
             }
         }
+
+        [RelayCommand]
+        private async Task LoadPets() => await LoadAllPets(false);
     }
 }

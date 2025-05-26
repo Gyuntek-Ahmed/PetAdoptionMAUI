@@ -7,7 +7,6 @@
         <ActivityIndicator
             HorizontalOptions="Center"
             IsRunning="True"
-            VerticalOptions="Center"
-            Color="AliceBlue" />
+            VerticalOptions="Center" />
     </Grid>
 </ContentPage>
