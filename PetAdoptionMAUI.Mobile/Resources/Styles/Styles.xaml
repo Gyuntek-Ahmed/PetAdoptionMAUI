@@ -455,4 +455,14 @@
         <Setter Property="FontSize" Value="20" />
     </Style>
 
+    <Style TargetType="Border" x:Key="iconBtnContainer">
+        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="WidthRequest" Value="30" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 5" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
 </ResourceDictionary>

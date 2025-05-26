@@ -32,8 +32,8 @@
 
             try
             {
-                var newlyAddedTask = _petsApi.GetNewlyAddedPetsAsync(20);
-                var popularPetsTask = _petsApi.GetPopularPetsAsync(20);
+                var newlyAddedTask = _petsApi.GetNewlyAddedPetsAsync(10);
+                var popularPetsTask = _petsApi.GetPopularPetsAsync(15);
                 var randomPetsTask = _petsApi.GetRandomPetsAsync(20);
 
                 NewlyAdded = (await newlyAddedTask).Data;
@@ -51,5 +51,9 @@
                 IsBusy = false;
             }
         }
+
+        [RelayCommand]
+        private async Task GoToDetailsPage(int petId)
+            => await GoToAsync($"{nameof(DetailsPage)}?{nameof(DetailsViewModel.PetId)}={petId}");
     }
 }

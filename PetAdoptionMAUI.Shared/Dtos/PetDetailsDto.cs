@@ -24,10 +24,10 @@ namespace PetAdoptionMAUI.Shared.Dtos
 
         public string CategoryImage => Category switch
         {
-            Category.Dog => "dog",
-            Category.Cat => "cat",
-            Category.Bird => "bird",
-            Category.Fish => "fish",
+            Category.Dog => "Куче",
+            Category.Cat => "Котка",
+            Category.Bird => "Птица",
+            Category.Fish => "Риба",
             _ => "Unknown"
         };
 
@@ -40,11 +40,11 @@ namespace PetAdoptionMAUI.Shared.Dtos
 
                 return days switch
                 {
-                    < 30 => days + " days",
-                    >= 30 and <= 31 => "1 month",
-                    < 365 => Math.Floor(diff.TotalDays / 30) + " months",
-                    >= 365 and < 730 => "1 year",
-                    _ => Math.Floor(diff.TotalDays / 365) + " years"
+                    < 30 => days + " Дни",
+                    >= 30 and <= 31 => "1 Месец",
+                    < 365 => Math.Floor(diff.TotalDays / 30) + " Месеца",
+                    >= 365 and < 730 => "1 Година",
+                    _ => Math.Floor(diff.TotalDays / 365) + " Години"
                 };
             }
         }

@@ -2,11 +2,121 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PetAdoptionMAUI.Mobile.Pages.DetailsPage"
-             Title="DetailsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:vm="clr-namespace:PetAdoptionMAUI.Mobile.ViewModels"
+             xmlns:models="clr-namespace:PetAdoptionMAUI.Mobile.Models"
+             xmlns:dtos="clr-namespace:PetAdoptionMAUI.Shared.Dtos;assembly=PetAdoptionMAUI.Shared"
+             xmlns:controls="clr-namespace:PetAdoptionMAUI.Mobile.Controls"
+             x:DataType="vm:DetailsViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.PresentationMode="ModalAnimated">
+
+    <Grid
+        RowDefinitions="Auto, *, *, Auto"
+        RowSpacing="20"
+        Padding="10, 20, 10, 10">
+        <FlexLayout
+            Grid.Row="0"
+            JustifyContent="SpaceBetween">
+            <Border Style="{StaticResource iconBtnContainer}">
+                <Image Source="left_arrow.png" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <Label
+                Text="Детайли"
+                FontSize="20"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+
+            <Border Style="{StaticResource iconBtnContainer}">
+                <Image Source="heart.png" />
+            </Border>
+        </FlexLayout>
+
+        <Border
+            Grid.Row="1"
+            HeightRequest="300"
+            WidthRequest="300"
+            StrokeShape="RoundRectangle 150"
+            StrokeThickness="0"
+            HorizontalOptions="Center">
+            <Image
+                Source="{Binding PetDetails.Image}"
+                HeightRequest="300"
+                WidthRequest="300"
+                Aspect="AspectFill" />
+        </Border>
+
+        <Grid
+            Grid.Row="2"
+            RowDefinitions="Auto, Auto, Auto"
+            ColumnDefinitions="*, *, *"
+            RowSpacing="25">
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Text="{Binding PetDetails.Name}"
+                FontSize="25"
+                FontAttributes="Bold"
+                VerticalOptions="End"/>
+
+            <Border
+                Grid.Row="0"
+                Grid.Column="2"
+                StrokeThickness="0"
+                VerticalOptions="End"
+                Padding="5">
+                <Label
+                    Text="{Binding PetDetails.Price, StringFormat='{0:C}'}"
+                    TextColor="PaleVioletRed"
+                    FontSize="23"
+                    FontAttributes="Bold"
+                    HorizontalOptions="End" />
+            </Border>
+
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                Text="{Binding PetDetails.Description}"
+                FontSize="16"
+                LineHeight="1.5" />
+
+            <controls:PetFeatControl
+                Grid.Row="2"
+                Grid.Column="0"
+                Icon="dog.svg"
+                Label="Порода"
+                Value="{Binding PetDetails.Breed}" />
+
+            <controls:PetFeatControl
+                Grid.Row="2"
+                Grid.Column="1"
+                Icon="{Binding PetDetails.GenderImage}"
+                Label="Пол"
+                Value="{Binding PetDetails.GenderDisplay}" />
+
+            <controls:PetFeatControl
+                Grid.Row="2"
+                Grid.Column="2"
+                Icon="calendar"
+                Label="Възраст"
+                Value="{Binding PetDetails.Age}" />
+
+        </Grid>
+
+        <Button
+            Text="Вземете сега"
+            Grid.Row="3"
+            Style="{StaticResource btnPrimary}" />
+
+        <ActivityIndicator
+            Grid.RowSpan="4"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Color="AliceBlue"
+            IsRunning="{Binding IsBusy}" />
+    </Grid>
+
 </ContentPage>

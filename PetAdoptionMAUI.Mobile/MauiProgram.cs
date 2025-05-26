@@ -44,6 +44,9 @@ namespace PetAdoptionMAUI.Mobile
             services
                 .AddSingleton<HomeViewModel>()
                 .AddSingleton<HomePage>();
+
+            services
+                .AddTransientWithShellRoute<DetailsPage, DetailsViewModel>(nameof(DetailsPage));
         }
 
         static void ConfigureRefit(IServiceCollection services)
